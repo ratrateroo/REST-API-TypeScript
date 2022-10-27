@@ -8,8 +8,13 @@ const validate = (schema: AnyZodObject) => {
         query: req.query,
         params: req.params,
       });
+      next();
     } catch (error: unknown) {
-      return res.status(400).send(error.errors);
+      if (error instanceof Error) {
+        return res.status(400).send(error.message);
+      }
     }
   };
 };
+
+export default validate;
