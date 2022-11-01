@@ -7,9 +7,12 @@ export async function createUserSessionHandler(req: Request, res: Response) {
   if (!user) {
     return res.status(401).send("Invalid email or password.");
   }
+
   // create a session
   const session = createSession(user._id, req.get("user-agent") || "");
-  //TODO: create an access token
+
+  //create an access token
+
   //TODO: create a refresh token
   //TODO: return access & refresh token
 }
