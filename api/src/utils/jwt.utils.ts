@@ -11,4 +11,21 @@ export function signJwt(object: Object, options?: jwt.SignOptions | undefined) {
   });
 }
 
-function verifyJwt() {}
+export function verifyJwt(token: string) {
+  try {
+    const decoded = jwt.verify(token, publicKey);
+    return {
+      valid: true,
+      expired: false,
+      decoded: decoded,
+    };
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return {
+        valid: false,
+        expired: error.message === "jwt expired",
+        decoded: null,
+      };
+    }
+  }
+}
