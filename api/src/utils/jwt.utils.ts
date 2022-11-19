@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import config from "config";
 
 //const privateKey = config.get<string>("accessTokenPrivateKey");
@@ -13,7 +13,7 @@ export function signJwt(object: Object, options?: jwt.SignOptions | undefined) {
   });
 }
 
-export function verifyJwt(token: string) {
+export function verifyJwt(token: string): JwtPayload {
   try {
     const decoded = jwt.verify(token, publicKey);
     return {
@@ -26,8 +26,14 @@ export function verifyJwt(token: string) {
       return {
         valid: false,
         expired: error.message === "jwt expired",
-        decoded: null,
+        //decoded: null,
+        decoded: "",
       };
     }
+    return {
+      valid: false,
+      expired: false,
+      decoded: "",
+    };
   }
 }
