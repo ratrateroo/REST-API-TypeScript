@@ -1,5 +1,8 @@
 import { Express, Request, Response } from "express";
-import { createProductHandler } from "./controller/product.controller";
+import {
+  createProductHandler,
+  updateProductHandler,
+} from "./controller/product.controller";
 import {
   createUserSessionHandler,
   deleteSessionHandler,
@@ -40,7 +43,7 @@ function routes(app: Express) {
   app.put(
     "/app/products",
     [requireUser, validateResource(updateProductSchema)],
-    createProductHandler
+    updateProductHandler
   );
 }
 
