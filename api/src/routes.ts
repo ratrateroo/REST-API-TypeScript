@@ -1,6 +1,7 @@
 import { Express, Request, Response } from "express";
 import {
   createProductHandler,
+  getProductHandler,
   updateProductHandler,
 } from "./controller/product.controller";
 import {
@@ -13,6 +14,7 @@ import requireUser from "./middleware/requireUser";
 import validateResource from "./middleware/validateResource";
 import {
   createProductSchema,
+  getProductSchema,
   updateProductSchema,
 } from "./schema/product.schema";
 import { createSessionSchema } from "./schema/session.schema";
@@ -44,6 +46,12 @@ function routes(app: Express) {
     "/app/products",
     [requireUser, validateResource(updateProductSchema)],
     updateProductHandler
+  );
+
+  app.get(
+    "/app/products",
+    validateResource(getProductSchema),
+    getProductHandler
   );
 }
 
