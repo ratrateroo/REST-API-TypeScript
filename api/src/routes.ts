@@ -1,6 +1,7 @@
 import { Express, Request, Response } from "express";
 import {
   createProductHandler,
+  deleteProductHandler,
   getProductHandler,
   updateProductHandler,
 } from "./controller/product.controller";
@@ -14,6 +15,7 @@ import requireUser from "./middleware/requireUser";
 import validateResource from "./middleware/validateResource";
 import {
   createProductSchema,
+  deleteProductSchema,
   getProductSchema,
   updateProductSchema,
 } from "./schema/product.schema";
@@ -52,6 +54,12 @@ function routes(app: Express) {
     "/app/products",
     validateResource(getProductSchema),
     getProductHandler
+  );
+
+  app.delete(
+    "/app/products",
+    [requireUser, validateResource(deleteProductSchema)],
+    deleteProductHandler
   );
 }
 
