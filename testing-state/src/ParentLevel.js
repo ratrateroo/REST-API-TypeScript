@@ -3,11 +3,11 @@ import Sibling1 from "./Sibling1";
 import Sibling2 from "./Sibling2";
 
 export default function ParentLevel() {
-  const [count, setCount] = useState(0);
-  const [count2, setCount2] = useState(0);
+  const [count, setCount] = useState({ value: 0 });
+  const [count2, setCount2] = useState();
 
   const setCountHandler = () => {
-    setCount((previewsValue) => previewsValue + 1);
+    setCount((previewsValue) => previewsValue.value + 1);
   };
 
   useEffect(() => {
