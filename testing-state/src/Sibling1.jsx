@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GrandChild from "./GrandChild";
 
 export default function Sibling1(props) {
+  useEffect(() => {
+    console.log("Sibling 1 Effect");
+  });
   return (
     <>
       <h3>Sibling Level</h3>
